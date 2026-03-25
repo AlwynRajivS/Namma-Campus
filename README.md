@@ -1,6 +1,3 @@
-# Namma-Campus
-A modern web-based portal designed for faculty to register student family details during events like Parent-Teacher Meetings. Built using HTML, CSS, JavaScript, and Google Apps Script with Google Sheets as a real-time backend.
-
 # 🎓 Namma Campus – Family Registration Portal
 
 A smart and modern web-based portal designed for seamless student family registration during academic events like Parent-Teacher Meetings.
