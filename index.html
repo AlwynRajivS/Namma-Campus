@@ -1,679 +1,2201 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Namma Campus – Registration Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --pk:#f472b6;--pk2:#ec4899;--pk3:#fce7f3;
-    --pu:#a855f7;--pu2:#7c3aed;--pu3:#f3e8ff;
-    --gr:#6b7280;--tx:#1a0a2e;
-    --grad:linear-gradient(135deg,#f472b6 0%,#a855f7 100%);
-    --gsoft:linear-gradient(135deg,#fce7f3 0%,#f3e8ff 100%);
-    --sha:0 8px 32px rgba(168,85,247,.13);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'DM Sans',sans-serif;background:#fff;min-height:100vh;overflow-x:hidden;color:var(--tx)}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Namma Campus Sangamam 2026 – Registration Portal</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --pk: #f472b6;
+      --pk2: #ec4899;
+      --pk3: #fce7f3;
+      --pk4: #fbcfe8;
+      --pu: #a855f7;
+      --pu2: #7c3aed;
+      --pu3: #f3e8ff;
+      --pu4: #e9d5ff;
+      --gr: #6b7280;
+      --gr2: #9ca3af;
+      --gr3: #f3f4f6;
+      --tx: #1a0a2e;
+      --tx2: #374151;
+      --green: #10b981;
+      --green2: #d1fae5;
+      --green3: #059669;
+      --grad: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+      --grad2: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
+      --gsoft: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+      --sha: 0 8px 32px rgba(168, 85, 247, .13);
+      --sha2: 0 24px 64px rgba(168, 85, 247, .24);
+    }
 
-  .blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .b{position:absolute;border-radius:50%;filter:blur(90px);opacity:.15;animation:bf 9s ease-in-out infinite alternate}
-  .b1{width:500px;height:500px;background:var(--pk);top:-140px;left:-120px}
-  .b2{width:440px;height:440px;background:var(--pu);bottom:-120px;right:-100px;animation-delay:3s}
-  .b3{width:300px;height:300px;background:var(--pk2);top:40%;left:55%;animation-delay:5.5s}
-  @keyframes bf{from{transform:scale(1) translate(0,0)}to{transform:scale(1.15) translate(24px,-20px)}}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-  .pg{display:none;position:relative;z-index:1}
-  .pg.on{display:flex;animation:fi .4s ease}
-  @keyframes fi{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-  .pg-center{min-height:100vh;align-items:center;justify-content:center;padding:24px;flex-direction:column}
-  .pg-portal{min-height:100vh;flex-direction:column}
+    html {
+      scroll-behavior: smooth
+    }
 
-  .card{background:rgba(255,255,255,.9);backdrop-filter:blur(20px);border-radius:26px;padding:38px 34px;box-shadow:var(--sha);border:1px solid rgba(168,85,247,.14)}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--tx)
+    }
 
-  .brand{text-align:center;margin-bottom:36px}
-  .brand-icon{width:70px;height:70px;border-radius:22px;background:var(--grad);display:inline-flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:14px;box-shadow:0 12px 30px rgba(244,114,182,.4);animation:pop .7s cubic-bezier(.34,1.56,.64,1)}
-  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
-  .brand h1{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .brand p{color:var(--gr);font-size:.86rem;margin-top:5px;font-style:italic}
+    .blobs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden
+    }
 
-  .tabs{display:flex;gap:8px;background:var(--gsoft);border-radius:14px;padding:6px;margin-bottom:28px}
-  .tb{flex:1;padding:11px;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .25s;background:transparent;color:var(--gr)}
-  .tb.on{background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(168,85,247,.36)}
+    .b {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .14;
+      animation: bf 9s ease-in-out infinite alternate
+    }
 
-  .fg{margin-bottom:20px}
-  label{display:block;font-size:.77rem;font-weight:700;color:var(--pu2);margin-bottom:7px;letter-spacing:.05em;text-transform:uppercase}
-  input,select{width:100%;padding:13px 16px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:.94rem;font-family:'DM Sans',sans-serif;transition:all .2s;background:#fff;color:var(--tx);outline:none;appearance:none;-webkit-appearance:none}
-  input:focus,select:focus{border-color:var(--pu);box-shadow:0 0 0 3px rgba(168,85,247,.12)}
-  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
-  select:disabled{background-color:#f9fafb;color:#9ca3af;cursor:not-allowed}
-  .err{color:#e11d48;font-size:.82rem;margin-top:6px;display:none;padding:9px 13px;background:#fff1f2;border-radius:9px;border-left:3px solid #e11d48}
-  .err.on{display:block}
+    .b1 {
+      width: 520px;
+      height: 520px;
+      background: var(--pk);
+      top: -150px;
+      left: -130px
+    }
 
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border:none;border-radius:14px;background:var(--grad);color:#fff;font-size:.96rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;box-shadow:0 6px 20px rgba(168,85,247,.3);letter-spacing:.02em;width:100%}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(168,85,247,.42)}
-  .btn:active{transform:translateY(0)}
-  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
-  .btn-out{background:transparent;color:var(--pu2);border:1.5px solid var(--pu);box-shadow:none}
-  .btn-out:hover{background:var(--pu3);box-shadow:none;transform:translateY(-1px)}
-  .btn-sm{padding:9px 18px;font-size:.84rem;width:auto;border-radius:10px}
-  .btn-red{background:linear-gradient(135deg,#f43f5e,#ec4899);box-shadow:0 4px 14px rgba(244,63,94,.28)}
+    .b2 {
+      width: 460px;
+      height: 460px;
+      background: var(--pu);
+      bottom: -130px;
+      right: -110px;
+      animation-delay: 3s
+    }
 
-  .topbar{background:rgba(255,255,255,.93);backdrop-filter:blur(16px);border-bottom:1px solid rgba(168,85,247,.13);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-  .tb-brand{display:flex;align-items:center;gap:12px}
-  .tb-icon{width:40px;height:40px;background:var(--grad);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-  .tb-brand h2{font-family:'Playfair Display',serif;font-size:1.18rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
-  .tb-brand span{font-size:.7rem;color:var(--gr);display:block}
-  .tb-right{display:flex;align-items:center;gap:10px}
-  .ubadge{background:var(--gsoft);border:1px solid rgba(168,85,247,.2);border-radius:20px;padding:6px 14px;font-size:.8rem;font-weight:500;color:var(--pu2);white-space:nowrap}
+    .b3 {
+      width: 320px;
+      height: 320px;
+      background: var(--pk2);
+      top: 38%;
+      left: 53%;
+      animation-delay: 5.5s
+    }
 
-  .content{flex:1;padding:28px 24px;max-width:980px;margin:0 auto;width:100%}
-  .sec-title{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px}
+    @keyframes bf {
+      from {
+        transform: scale(1) translate(0, 0)
+      }
 
-  .frow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+      to {
+        transform: scale(1.16) translate(26px, -22px)
+      }
+    }
 
-  .slist{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;max-height:420px;overflow-y:auto;padding-right:4px}
-  .slist::-webkit-scrollbar{width:5px}
-  .slist::-webkit-scrollbar-track{background:#f3f4f6;border-radius:6px}
-  .slist::-webkit-scrollbar-thumb{background:var(--pk);border-radius:6px}
-  .sc{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:all .2s;animation:fi .3s ease}
-  .sc:hover{border-color:var(--pu);box-shadow:0 4px 16px rgba(168,85,247,.1);transform:translateX(3px)}
-  .sc.sel{border-color:var(--pk2);background:var(--pk3);box-shadow:0 4px 18px rgba(244,114,182,.22)}
-  .av{width:44px;height:44px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;flex-shrink:0}
-  .si h4{font-size:.94rem;font-weight:600;color:var(--tx)}
-  .si p{font-size:.78rem;color:var(--gr);margin-top:2px}
-  .chk{margin-left:auto;width:24px;height:24px;border:2px solid #d1d5db;border-radius:7px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:.8rem}
-  .sc.sel .chk{background:var(--grad);border-color:transparent;color:#fff}
+    .pg {
+      display: none;
+      position: relative;
+      z-index: 1
+    }
 
-  .rpanel{background:var(--gsoft);border:1.5px solid rgba(168,85,247,.18);border-radius:20px;padding:26px;margin-top:8px;animation:fi .35s ease}
-  .rpanel h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--pu2);margin-bottom:18px}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
-  .chip{background:#fff;border:1px solid rgba(168,85,247,.2);border-radius:10px;padding:6px 14px;font-size:.8rem;color:var(--pu2);font-weight:500}
-  .chip span{color:var(--gr);font-weight:400;margin-left:5px}
-  .btn-row{display:flex;gap:12px;flex-wrap:wrap}
-  .btn-row .btn{flex:1;min-width:130px}
+    .pg.on {
+      display: flex;
+      animation: fi .4s ease
+    }
 
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:16px;margin-bottom:30px}
-  .stc{background:#fff;border-radius:20px;padding:22px 18px;box-shadow:var(--sha);border:1px solid rgba(168,85,247,.08);text-align:center;position:relative;overflow:hidden;transition:transform .2s}
-  .stc:hover{transform:translateY(-4px)}
-  .stc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
-  .stc-icon{font-size:2.1rem;margin-bottom:10px}
-  .stc-num{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .stc-lbl{font-size:.78rem;color:var(--gr);margin-top:4px;font-weight:500}
+    @keyframes fi {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
 
-  .twrap{background:#fff;border-radius:20px;box-shadow:var(--sha);overflow:hidden;margin-bottom:28px}
-  .thead2{padding:18px 22px;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-  .thead2 h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--tx)}
-  .tscroll{overflow-x:auto}
-  table{width:100%;border-collapse:collapse}
-  th{padding:12px 16px;font-size:.73rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pu2);background:var(--gsoft);text-align:left;white-space:nowrap}
-  td{padding:12px 16px;font-size:.86rem;color:var(--tx);border-bottom:1px solid #faf9ff;white-space:nowrap}
-  tr:last-child td{border-bottom:none}
-  tr:hover td{background:#fdf4ff}
-  .badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.74rem;font-weight:700}
-  .bp{background:var(--pu3);color:var(--pu2)}
-  .bk{background:var(--pk3);color:#be185d}
-  .bg{background:#dcfce7;color:#166534}
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
 
-  .empty{text-align:center;padding:52px 20px;color:var(--gr)}
-  .empty-ic{font-size:3rem;margin-bottom:12px;opacity:.4;display:block}
+    .pg-center {
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      flex-direction: column
+    }
 
-  /* Network error banner */
-  .net-err{background:#fff1f2;border:1.5px solid #fecdd3;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:none;align-items:center;gap:12px;flex-wrap:wrap}
-  .net-err.on{display:flex}
-  .net-err-msg{font-size:.86rem;color:#be185d;flex:1;min-width:200px}
-  .net-err-msg strong{display:block;margin-bottom:2px}
+    .pg-portal {
+      min-height: 100vh;
+      flex-direction: column
+    }
 
-  #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--grad);color:#fff;padding:13px 28px;border-radius:40px;font-size:.9rem;font-weight:600;box-shadow:0 8px 28px rgba(168,85,247,.4);transition:transform .38s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;pointer-events:none}
-  #toast.on{transform:translateX(-50%) translateY(0)}
+    .card {
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(22px);
+      border-radius: 28px;
+      padding: 40px 36px;
+      box-shadow: var(--sha);
+      border: 1px solid rgba(168, 85, 247, .15)
+    }
 
-  .spin{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite}
-  @keyframes rot{to{transform:rotate(360deg)}}
-  .spin-pu{border-color:rgba(168,85,247,.25);border-top-color:var(--pu)}
+    .brand {
+      text-align: center;
+      margin-bottom: 38px
+    }
 
-  #ls{position:fixed;inset:0;background:#fff;z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px}
-  .ll{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .lbar{width:220px;height:5px;background:var(--gsoft);border-radius:5px;overflow:hidden}
-  .lbar-i{height:100%;background:var(--grad);border-radius:5px;animation:lb 1.6s cubic-bezier(.4,0,.2,1) forwards}
-  @keyframes lb{from{width:0%}to{width:100%}}
+    .brand-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 24px;
+      background: var(--grad);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      margin-bottom: 16px;
+      box-shadow: 0 14px 32px rgba(244, 114, 182, .42);
+      animation: pop .75s cubic-bezier(.34, 1.56, .64, 1)
+    }
 
-  @media(max-width:640px){
-    .card{padding:26px 18px}.content{padding:18px 14px}
-    .stats{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}
-    th,td{padding:10px 11px;font-size:.79rem}.topbar{padding:11px 14px}.ubadge{display:none}
-  }
-  @media(max-width:380px){.stats{grid-template-columns:1fr}.brand h1{font-size:1.75rem}}
-</style>
+    @keyframes pop {
+      from {
+        transform: scale(.3);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .brand h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    .brand p {
+      color: var(--gr);
+      font-size: .86rem;
+      margin-top: 6px;
+      font-style: italic
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      background: var(--gsoft);
+      border-radius: 14px;
+      padding: 6px;
+      margin-bottom: 30px
+    }
+
+    .tb {
+      flex: 1;
+      padding: 11px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .28s;
+      background: transparent;
+      color: var(--gr)
+    }
+
+    .tb.on {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(168, 85, 247, .36)
+    }
+
+    .fg {
+      margin-bottom: 20px
+    }
+
+    label {
+      display: block;
+      font-size: .76rem;
+      font-weight: 700;
+      color: var(--pu2);
+      margin-bottom: 7px;
+      letter-spacing: .06em;
+      text-transform: uppercase
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: .94rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .22s;
+      background: #fff;
+      color: var(--tx);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--pu);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, .13)
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px
+    }
+
+    select:disabled {
+      background-color: #f9fafb;
+      color: var(--gr2);
+      cursor: not-allowed
+    }
+
+    .err {
+      color: #e11d48;
+      font-size: .82rem;
+      margin-top: 6px;
+      display: none;
+      padding: 10px 14px;
+      background: #fff1f2;
+      border-radius: 10px;
+      border-left: 3px solid #e11d48;
+      animation: fi .2s ease
+    }
+
+    .err.on {
+      display: block
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 14px;
+      background: var(--grad);
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all .26s;
+      box-shadow: 0 6px 22px rgba(168, 85, 247, .32);
+      letter-spacing: .02em;
+      width: 100%
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(168, 85, 247, .44)
+    }
+
+    .btn:active {
+      transform: translateY(0)
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none
+    }
+
+    .btn-out {
+      background: transparent;
+      color: var(--pu2);
+      border: 1.5px solid var(--pu);
+      box-shadow: none
+    }
+
+    .btn-out:hover {
+      background: var(--pu3);
+      box-shadow: none;
+      transform: translateY(-1px)
+    }
+
+    .btn-sm {
+      padding: 9px 18px;
+      font-size: .83rem;
+      width: auto;
+      border-radius: 10px
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #f43f5e, #ec4899);
+      box-shadow: 0 4px 14px rgba(244, 63, 94, .28)
+    }
+
+    .btn-red:hover {
+      box-shadow: 0 10px 26px rgba(244, 63, 94, .4)
+    }
+
+    .topbar {
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(168, 85, 247, .12);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200
+    }
+
+    .tb-brand {
+      display: flex;
+      align-items: center;
+      gap: 13px
+    }
+
+    .tb-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--grad);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      flex-shrink: 0
+    }
+
+    .tb-brand h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1
+    }
+
+    .tb-brand span {
+      font-size: .7rem;
+      color: var(--gr);
+      display: block
+    }
+
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .ubadge {
+      background: var(--gsoft);
+      border: 1px solid rgba(168, 85, 247, .2);
+      border-radius: 22px;
+      padding: 7px 15px;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--pu2);
+      white-space: nowrap
+    }
+
+    .content {
+      flex: 1;
+      padding: 28px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 26px
+    }
+
+    .frow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px
+    }
+
+    /* PROGRESS */
+    .prog-wrap {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(168, 85, 247, .1);
+      box-shadow: var(--sha);
+      margin-bottom: 20px;
+      animation: fi .3s ease
+    }
+
+    .prog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px
+    }
+
+    .prog-header span {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--tx2)
+    }
+
+    .prog-pct {
+      font-weight: 800;
+      color: var(--pu2);
+      font-size: .9rem
+    }
+
+    .prog-bar {
+      height: 9px;
+      background: var(--gr3);
+      border-radius: 9px;
+      overflow: hidden
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--grad);
+      border-radius: 9px;
+      transition: width .7s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .prog-stats {
+      display: flex;
+      gap: 18px;
+      margin-top: 11px;
+      flex-wrap: wrap
+    }
+
+    .prog-stat {
+      font-size: .78rem;
+      color: var(--gr);
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .prog-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    /* VIEW TABS */
+    .view-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px
+    }
+
+    .vt {
+      flex: 1;
+      padding: 13px 12px;
+      border: 2px solid #e5e7eb;
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .26s;
+      background: #fff;
+      color: var(--gr);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px
+    }
+
+    .vt-cnt {
+      font-size: .72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--gr3);
+      color: var(--gr);
+      transition: all .26s;
+      font-weight: 700
+    }
+
+    .vt-unreg.on {
+      background: var(--pk3);
+      border-color: var(--pk2);
+      color: #be185d
+    }
+
+    .vt-unreg.on .vt-cnt {
+      background: var(--pk2);
+      color: #fff
+    }
+
+    .vt-reg.on {
+      background: var(--green2);
+      border-color: var(--green);
+      color: var(--green3)
+    }
+
+    .vt-reg.on .vt-cnt {
+      background: var(--green);
+      color: #fff
+    }
+
+    /* SEARCH */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 16px
+    }
+
+    .search-wrap input {
+      padding-left: 42px;
+      background: var(--gsoft);
+      border-color: transparent
+    }
+
+    .search-wrap input:focus {
+      background: #fff;
+      border-color: var(--pu)
+    }
+
+    .search-ic {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      opacity: .4;
+      pointer-events: none
+    }
+
+    /* STUDENT CARDS */
+    .slist {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: calc(100vh - 250px);
+      overflow-y: auto;
+      padding-right: 4px
+    }
+
+    .slist::-webkit-scrollbar {
+      width: 5px
+    }
+
+    .slist::-webkit-scrollbar-track {
+      background: var(--gr3);
+      border-radius: 6px
+    }
+
+    .slist::-webkit-scrollbar-thumb {
+      background: var(--pk);
+      border-radius: 6px
+    }
+
+    .sc {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all .22s;
+      animation: fi .3s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 100px;     /* 🔥 ensures full name visibility */
+    }
+
+    .sc::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: transparent;
+      border-radius: 0 3px 3px 0;
+      transition: background .22s
+    }
+
+    .sc:hover {
+      box-shadow: 0 4px 18px rgba(168, 85, 247, .1);
+      transform: translateX(4px)
+    }
+
+    .sc.unreg:hover {
+      border-color: var(--pk2)
+    }
+
+    .sc.unreg:hover::before {
+      background: var(--pk2)
+    }
+
+    .sc.reg {
+      border-color: rgba(16, 185, 129, .4);
+      background: #f0fdf9
+    }
+
+    .sc.reg::before {
+      background: var(--green)
+    }
+
+    .sc.reg:hover {
+      border-color: var(--green);
+      box-shadow: 0 4px 18px rgba(16, 185, 129, .16);
+      transform: translateX(4px)
+    }
+
+    .av {
+      width: 46px;
+      height: 70px;
+      border-radius: 13px;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      font-family: 'Playfair Display', serif
+    }
+
+    .av-g {
+      background: linear-gradient(135deg, #10b981, #059669)
+    }
+
+    .si {
+      flex: 1;
+      min-width: 0
+    }
+
+    .si h4 {
+      font-size: .94rem;
+      font-weight: 600;
+      color: var(--tx);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .si p {
+      font-size: .77rem;
+      color: var(--gr);
+      margin-top: 2px
+    }
+
+    .sc-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      flex-shrink: 0
+    }
+
+    .fam-badge {
+      background: var(--green);
+      color: #fff;
+      font-size: .71rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .pend-badge {
+      background: var(--pk3);
+      color: var(--pk2);
+      font-size: .71rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 700
+    }
+
+    .arrow-ic {
+      color: var(--gr2);
+      font-size: 1.2rem;
+      transition: transform .2s;
+      line-height: 1
+    }
+
+    .sc:hover .arrow-ic {
+      transform: translateX(3px)
+    }
+
+    /* EMPTY */
+    .empty {
+      text-align: center;
+      padding: 52px 20px;
+      color: var(--gr)
+    }
+
+    .empty-ic {
+      font-size: 3.2rem;
+      margin-bottom: 14px;
+      opacity: .38;
+      display: block
+    }
+
+    .empty p {
+      font-size: .9rem
+    }
+
+    /* NET ERROR */
+    .net-err {
+      background: #fff1f2;
+      border: 1.5px solid var(--pk4);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .net-err.on {
+      display: flex
+    }
+
+    .net-err-msg {
+      font-size: .86rem;
+      color: #be185d;
+      flex: 1;
+      min-width: 180px
+    }
+
+    .net-err-msg strong {
+      display: block;
+      margin-bottom: 2px
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px
+    }
+
+    .stc {
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px 18px;
+      box-shadow: var(--sha);
+      border: 1px solid rgba(168, 85, 247, .08);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .22s
+    }
+
+    .stc:hover {
+      transform: translateY(-4px)
+    }
+
+    .stc::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--grad)
+    }
+
+    .stc-icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px
+    }
+
+    .stc-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    .stc-lbl {
+      font-size: .77rem;
+      color: var(--gr);
+      margin-top: 4px;
+      font-weight: 500
+    }
+
+    /* TABLES */
+    .twrap {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: var(--sha);
+      overflow: hidden;
+      margin-bottom: 28px
+    }
+
+    .thead2 {
+      padding: 18px 22px;
+      border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .thead2 h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--tx)
+    }
+
+    .tscroll {
+      overflow-x: auto
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    th {
+      padding: 12px 16px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--pu2);
+      background: var(--gsoft);
+      text-align: left;
+      white-space: nowrap
+    }
+
+    td {
+      padding: 12px 16px;
+      font-size: .86rem;
+      color: var(--tx);
+      border-bottom: 1px solid #faf9ff;
+      white-space: nowrap
+    }
+
+    tr:last-child td {
+      border-bottom: none
+    }
+
+    tr:hover td {
+      background: #fdf4ff
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 11px;
+      border-radius: 20px;
+      font-size: .74rem;
+      font-weight: 700
+    }
+
+    .bp {
+      background: var(--pu3);
+      color: var(--pu2)
+    }
+
+    .bk {
+      background: var(--pk3);
+      color: #be185d
+    }
+
+    .bg {
+      background: var(--green2);
+      color: var(--green3)
+    }
+
+    /* ════════════ OVERLAY + POPUP ════════════ */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 10, 46, .68);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px
+    }
+
+    .overlay.on {
+      display: flex;
+      animation: overlayIn .3s ease forwards
+    }
+
+    @keyframes overlayIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .overlay.closing {
+      animation: overlayOut .25s ease forwards
+    }
+
+    @keyframes overlayOut {
+      to {
+        opacity: 0
+      }
+    }
+
+    .popup {
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: var(--sha2);
+      max-width: 500px;
+      width: 100%;
+      max-height: 93vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(.86) translateY(32px);
+      animation: popupIn .46s cubic-bezier(.34, 1.56, .64, 1) forwards
+    }
+
+    @keyframes popupIn {
+      to {
+        transform: scale(1) translateY(0)
+      }
+    }
+
+    .overlay.closing .popup {
+      animation: popupOut .24s ease forwards
+    }
+
+    @keyframes popupOut {
+      to {
+        transform: scale(.88) translateY(24px);
+        opacity: 0
+      }
+    }
+
+    /* Popup Header */
+    .ph {
+      padding: 26px 28px 24px;
+      position: relative;
+      background: var(--grad);
+      overflow: hidden;
+      flex-shrink: 0
+    }
+
+    .ph::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .07)
+    }
+
+    .ph::before {
+      content: '';
+      position: absolute;
+      bottom: -35px;
+      left: -25px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .ph-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      position: relative;
+      z-index: 1
+    }
+
+    .ph-av {
+      width: 58px;
+      height: 75px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .22);
+      border: 2.5px solid rgba(255, 255, 255, .35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0
+    }
+
+    .ph-info {
+      flex: 1;
+      min-width: 0
+    }
+
+    .ph-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      word-break: break-word
+    }
+
+    .ph-info p {
+      font-size: .81rem;
+      color: rgba(255, 255, 255, .8);
+      margin-top: 4px
+    }
+
+    .ph-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .18);
+      border: 1px solid rgba(255, 255, 255, .28);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all .22s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      line-height: 1
+    }
+
+    .ph-close:hover {
+      background: rgba(255, 255, 255, .32);
+      transform: rotate(90deg) scale(1.1)
+    }
+
+    .ph-status {
+      position: relative;
+      z-index: 1;
+      margin-top: 14px
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .2);
+      border: 1px solid rgba(255, 255, 255, .32);
+      font-size: .76rem;
+      font-weight: 600;
+      color: #fff
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .sdot-new {
+      background: #fbbf24
+    }
+
+    .sdot-reg {
+      background: #34d399
+    }
+
+    /* Popup Body */
+    .pb {
+      padding: 24px 28px;
+      overflow-y: auto;
+      flex: 1
+    }
+
+    .pb::-webkit-scrollbar {
+      width: 5px
+    }
+
+    .pb::-webkit-scrollbar-track {
+      background: var(--gr3);
+      border-radius: 6px
+    }
+
+    .pb::-webkit-scrollbar-thumb {
+      background: var(--pk);
+      border-radius: 6px
+    }
+
+    .sec-lbl {
+      font-size: .74rem;
+      font-weight: 700;
+      color: var(--gr);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .sec-lbl:first-child {
+      margin-top: 0
+    }
+
+    .sec-lbl::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gr3)
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    .ii {
+      background: var(--gsoft);
+      border-radius: 13px;
+      padding: 12px 15px;
+      border: 1px solid rgba(168, 85, 247, .08)
+    }
+
+    .ii label {
+      font-size: .67rem;
+      font-weight: 700;
+      color: var(--pu2);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 5px
+    }
+
+    .ii .val {
+      font-size: .94rem;
+      font-weight: 600;
+      color: var(--tx)
+    }
+
+    .ii.full {
+      grid-column: 1/-1
+    }
+
+    .ii.edit-hi {
+      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+      border-color: rgba(16, 185, 129, .25)
+    }
+
+    .ii.edit-hi label {
+      color: var(--green3)
+    }
+
+    .ii.edit-hi .val {
+      color: var(--green3)
+    }
+
+    .fam-input-box {
+      background: var(--gsoft);
+      border-radius: 18px;
+      padding: 20px;
+      border: 1.5px solid rgba(168, 85, 247, .12);
+      margin-top: 4px
+    }
+
+    .fam-input-box>label {
+      color: var(--pu2);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block
+    }
+
+    .count-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .cnt-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1.5px solid var(--pu);
+      background: #fff;
+      color: var(--pu2);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 300;
+      line-height: 1;
+      user-select: none
+    }
+
+    .cnt-btn:hover {
+      background: var(--pu);
+      color: #fff;
+      transform: scale(1.09)
+    }
+
+    .cnt-btn:active {
+      transform: scale(.96)
+    }
+
+    .cnt-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    #popup-fcount {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 11px 14px;
+      flex: 1;
+      border-color: var(--pu4);
+      border-radius: 12px
+    }
+
+    #popup-fcount:focus {
+      border-color: var(--pu);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, .13)
+    }
+
+    .quick-counts {
+      display: flex;
+      gap: 7px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .qc {
+      padding: 6px 15px;
+      border-radius: 10px;
+      border: 1.5px solid #e5e7eb;
+      background: #fff;
+      font-size: .83rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--tx2);
+      transition: all .2s
+    }
+
+    .qc:hover {
+      border-color: var(--pu);
+      color: var(--pu2);
+      background: var(--pu3)
+    }
+
+    .qc.active {
+      border-color: var(--pu);
+      background: var(--pu);
+      color: #fff
+    }
+
+    /* Popup Footer */
+    .pf {
+      padding: 16px 28px 26px;
+      display: flex;
+      gap: 10px;
+      border-top: 1px solid var(--gr3);
+      flex-shrink: 0
+    }
+
+    /* TOAST */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 40px;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: transform .38s cubic-bezier(.34, 1.56, .64, 1);
+      z-index: 9999;
+      white-space: nowrap;
+      pointer-events: none;
+      max-width: calc(100vw - 40px);
+      text-align: center
+    }
+
+    #toast.on {
+      transform: translateX(-50%) translateY(0)
+    }
+
+    #toast.success {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 8px 28px rgba(16, 185, 129, .4)
+    }
+
+    #toast.error {
+      background: linear-gradient(135deg, #f43f5e, #dc2626);
+      box-shadow: 0 8px 28px rgba(244, 63, 94, .4)
+    }
+
+    #toast.info {
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      box-shadow: 0 8px 28px rgba(168, 85, 247, .4)
+    }
+
+    .spin {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255, 255, 255, .3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: rot .7s linear infinite;
+      vertical-align: middle
+    }
+
+    @keyframes rot {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .spin-pu {
+      border-color: rgba(168, 85, 247, .25);
+      border-top-color: var(--pu)
+    }
+
+    #ls {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 18px
+    }
+
+    .ll {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    .lbar {
+      width: 230px;
+      height: 5px;
+      background: var(--gsoft);
+      border-radius: 5px;
+      overflow: hidden
+    }
+
+    .lbar-i {
+      height: 100%;
+      background: var(--grad);
+      border-radius: 5px;
+      animation: lb 1.7s cubic-bezier(.4, 0, .2, 1) forwards
+    }
+
+    @keyframes lb {
+      from {
+        width: 0%
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @media(max-width:640px) {
+      .card {
+        padding: 26px 18px
+      }
+
+      .content {
+        padding: 18px 14px
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .frow {
+        grid-template-columns: 1fr
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr
+      }
+
+      th,
+      td {
+        padding: 10px 11px;
+        font-size: .79rem
+      }
+
+      .topbar {
+        padding: 11px 14px
+      }
+
+      .ubadge {
+        display: none
+      }
+
+      .popup {
+        border-radius: 24px
+      }
+
+      .ph {
+        padding: 20px 20px 18px
+      }
+
+      .pb {
+        padding: 20px
+      }
+
+      .pf {
+        padding: 14px 20px 22px
+      }
+
+      .view-tabs {
+        flex-direction: column
+      }
+    }
+
+    @media(max-width:380px) {
+      .stats {
+        grid-template-columns: 1fr
+      }
+
+      .brand h1 {
+        font-size: 1.78rem
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="blobs">
-  <div class="b b1"></div><div class="b b2"></div><div class="b b3"></div>
-</div>
-
-<!-- LOADING -->
-<div id="ls">
-  <div style="font-size:3.4rem;animation:pop .7s cubic-bezier(.34,1.56,.64,1)">🎓</div>
-  <div class="ll">Namma Campus</div>
-  <div class="lbar"><div class="lbar-i"></div></div>
-  <div style="color:var(--gr);font-size:.83rem;letter-spacing:.06em">LOADING PORTAL…</div>
-</div>
-
-<!-- ══════════ LOGIN ══════════ -->
-<div id="pg-login" class="pg pg-center">
-  <div style="width:100%;max-width:430px">
-    <div class="brand">
-      <div class="brand-icon">🎓</div>
-      <h1>Namma Campus</h1>
-      <p>Family Registration Portal · 2024</p>
-    </div>
-    <div class="card">
-      <div class="tabs">
-        <button class="tb on" onclick="switchRole('faculty')">👩‍🏫 Faculty</button>
-        <button class="tb"    onclick="switchRole('admin')">🛡️ Admin</button>
-      </div>
-      <div class="fg">
-        <label>Username</label>
-        <input type="text" id="lu" placeholder="Enter your username" autocomplete="username">
-      </div>
-      <div class="fg">
-        <label>Password</label>
-        <input type="password" id="lp" placeholder="Enter your password"
-               autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-      </div>
-      <div class="err" id="lerr"></div>
-      <button class="btn" id="lbtn" onclick="doLogin()">Sign In →</button>
-    </div>
-    <p style="text-align:center;color:var(--gr);font-size:.75rem;margin-top:18px">
-      © 2024 Namma Campus · All rights reserved
-    </p>
+  <div class="blobs">
+    <div class="b b1"></div>
+    <div class="b b2"></div>
+    <div class="b b3"></div>
   </div>
-</div>
 
-<!-- ══════════ FACULTY PORTAL ══════════ -->
-<div id="pg-faculty" class="pg pg-portal">
-  <div class="topbar">
-    <div class="tb-brand">
-      <div class="tb-icon">🎓</div>
-      <div><h2>Namma Campus</h2><span>Faculty Portal</span></div>
+  <!-- LOADING -->
+  <div id="ls">
+    <div style="font-size:3.6rem;animation:pop .75s cubic-bezier(.34,1.56,.64,1)">🎓</div>
+   <div class="ll" style="text-align:center;">Namma Campus Sangamam 2026</div>
+    <div class="lbar">
+      <div class="lbar-i"></div>
     </div>
-    <div class="tb-right">
-      <div class="ubadge">👤 <span id="fname"></span></div>
-      <button class="btn btn-red btn-sm" onclick="logout()">⏻ Logout</button>
-    </div>
+    <div style="color:var(--gr);font-size:.83rem;letter-spacing:.06em">LOADING PORTAL…</div>
   </div>
-  <div class="content">
-    <div class="sec-title">Register Family Members</div>
 
-    <div class="net-err" id="f-neterr">
-      <span style="font-size:1.6rem">⚠️</span>
-      <div class="net-err-msg">
-        <strong>Could not load student data from Google Sheet.</strong>
-        Ensure GAS_URL is set correctly and the Web App is deployed as "Anyone" access.
+  <!-- ══════════ LOGIN ══════════ -->
+  <div id="pg-login" class="pg pg-center">
+    <div style="width:100%;max-width:440px">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <h1>Namma Campus Sangamam 2026</h1>
+        <p>Parents Registration Portal</p>
       </div>
-      <button class="btn btn-out btn-sm" onclick="loadAllStudents()">↻ Retry</button>
-    </div>
-
-    <div class="frow">
-      <div class="fg" style="margin:0">
-        <label>Department</label>
-        <select id="fd" onchange="onDeptChange()"><option value="">— Select Dept —</option></select>
-      </div>
-      <div class="fg" style="margin:0">
-        <label>Year</label>
-        <select id="fy" onchange="onYearChange()" disabled><option value="">— Select Year —</option></select>
-      </div>
-      <div class="fg" style="margin:0">
-        <label>Section</label>
-        <select id="fs" onchange="onSecChange()" disabled><option value="">— Select Section —</option></select>
-      </div>
-    </div>
-
-    <div id="slist-wrap">
-      <div class="empty"><span class="empty-ic">🎒</span>Select Dept → Year → Section to view students</div>
-    </div>
-
-    <div id="rpanel" class="rpanel" style="display:none">
-      <h3>📝 Enter Family Details</h3>
-      <div class="chips" id="rchips"></div>
-      <div class="fg">
-        <label>Number of Family Members</label>
-        <input type="number" id="fcount" min="1" max="50" placeholder="e.g. 4"
-               onkeydown="if(event.key==='Enter')submitReg()">
-      </div>
-      <div class="btn-row">
-        <button class="btn" onclick="submitReg()">✅ Submit Registration</button>
-        <button class="btn btn-out" onclick="clearSel()"
-                style="flex:0 0 auto;width:auto;padding:14px 22px">✕ Clear</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════ ADMIN PORTAL ══════════ -->
-<div id="pg-admin" class="pg pg-portal">
-  <div class="topbar">
-    <div class="tb-brand">
-      <div class="tb-icon">🎓</div>
-      <div><h2>Namma Campus</h2><span>Admin Dashboard</span></div>
-    </div>
-    <div class="tb-right">
-      <div class="ubadge">🛡️ Administrator</div>
-      <button class="btn btn-red btn-sm" onclick="logout()">⏻ Logout</button>
-    </div>
-  </div>
-  <div class="content">
-    <div class="sec-title">Dashboard Overview</div>
-
-    <div class="net-err" id="a-neterr">
-      <span style="font-size:1.6rem">⚠️</span>
-      <div class="net-err-msg">
-        <strong>Could not load dashboard data from Google Sheet.</strong>
-        Verify your GAS_URL and Web App deployment settings.
-      </div>
-      <button class="btn btn-out btn-sm" onclick="loadAdminData()">↻ Retry</button>
-    </div>
-
-    <div class="stats">
-      <div class="stc"><div class="stc-icon">👨‍🎓</div><div class="stc-num" id="s-stu">—</div><div class="stc-lbl">Students Registered</div></div>
-      <div class="stc"><div class="stc-icon">👨‍👩‍👧‍👦</div><div class="stc-num" id="s-fam">—</div><div class="stc-lbl">Total Family Members</div></div>
-      <div class="stc"><div class="stc-icon">🏫</div><div class="stc-num" id="s-dep">—</div><div class="stc-lbl">Departments</div></div>
-      <div class="stc"><div class="stc-icon">👩‍🏫</div><div class="stc-num" id="s-fac">—</div><div class="stc-lbl">Faculty Entered</div></div>
-    </div>
-
-    <div class="twrap">
-      <div class="thead2">
-        <h3>📊 Department · Year · Section Summary</h3>
-        <button class="btn btn-out btn-sm" onclick="loadAdminData()">↻ Refresh</button>
-      </div>
-      <div class="tscroll">
-        <table>
-          <thead><tr><th>Department</th><th>Year</th><th>Section</th><th>Students</th><th>Family Members</th></tr></thead>
-          <tbody id="atb">
-            <tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gr)">
-              <span class="spin spin-pu"></span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="twrap">
-      <div class="thead2">
-        <h3>🕐 All Registrations</h3>
-        <span id="rec-count" style="font-size:.8rem;color:var(--gr)"></span>
-      </div>
-      <div class="tscroll">
-        <table>
-          <thead><tr><th>#</th><th>Roll No.</th><th>Name</th><th>Dept</th><th>Year</th><th>Sec</th><th>Family</th><th>Faculty</th></tr></thead>
-          <tbody id="rtb">
-            <tr><td colspan="8" style="text-align:center;padding:32px;color:var(--gr)">
-              <span class="spin spin-pu"></span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="toast"></div>
-
-<script>
-/* ═══════════════════════════════════════════════════════════
-   ▶  SET YOUR GAS WEB APP URL HERE — nothing else to change
-═══════════════════════════════════════════════════════════ */
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbyWuKNQEkXuxFXLUM4SoBsP9kIqpyrfRZamms50lVCsjml3uuTZslDwBwBkiBxryzAs/exec';
-
-/* ─── STATE ─── */
-let activeRole   = 'faculty';
-let currentUser  = '';
-let allStudents  = [];   // fetched from StudentsDB sheet via GAS
-let filteredList = [];
-let selStudent   = null;
-
-/* ─── BOOT ─── */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const ls = document.getElementById('ls');
-    ls.style.transition = 'opacity .4s';
-    ls.style.opacity = '0';
-    setTimeout(() => { ls.style.display = 'none'; showPage('login'); }, 420);
-  }, 1700);
-});
-
-/* ─── GAS FETCH WRAPPER ─── */
-async function gasCall(params) {
-  if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL_HERE') {
-    throw new Error('GAS_URL not set. Open the HTML file and paste your Apps Script Web App URL.');
-  }
-  const url = GAS_URL + '?data=' + encodeURIComponent(JSON.stringify(params));
-  const res  = await fetch(url, { method: 'GET', cache: 'no-cache' });
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  return res.json();
-}
-
-/* ─── PAGE NAV ─── */
-function showPage(n) {
-  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-  document.getElementById('pg-' + n).classList.add('on');
-}
-
-/* ═══════════════════════════════════════════════════════════
-   LOGIN
-   Sends credentials to GAS → GAS reads UserDB sheet and
-   verifies. No users are stored in this HTML file.
-═══════════════════════════════════════════════════════════ */
-function switchRole(role) {
-  activeRole = role;
-  document.querySelectorAll('.tabs .tb').forEach((b, i) =>
-    b.classList.toggle('on', (i===0&&role==='faculty')||(i===1&&role==='admin')));
-  document.getElementById('lerr').classList.remove('on');
-}
-
-async function doLogin() {
-  const user = document.getElementById('lu').value.trim();
-  const pass = document.getElementById('lp').value.trim();
-  document.getElementById('lerr').classList.remove('on');
-
-  if (!user || !pass) { showLoginErr('Please enter your username and password.'); return; }
-
-  const btn = document.getElementById('lbtn');
-  btn.innerHTML = '<span class="spin"></span> Verifying…';
-  btn.disabled = true;
-
-  try {
-    /* GAS reads UserDB sheet row-by-row and returns {success, role} */
-    const res = await gasCall({
-      action: 'login', username: user, password: pass, role: activeRole
-    });
-
-    if (res.success) {
-      currentUser = user;
-      if (res.role === 'Admin') {
-        showPage('admin');
-        loadAdminData();
-      } else {
-        document.getElementById('fname').textContent = user;
-        showPage('faculty');
-        loadAllStudents();   // ← fetch StudentsDB from GAS
-      }
-    } else {
-      showLoginErr(res.message || 'Invalid username or password.');
-    }
-  } catch (e) {
-    showLoginErr('⚠️ Cannot reach server. Set GAS_URL correctly and redeploy.');
-  }
-
-  btn.innerHTML = 'Sign In →';
-  btn.disabled = false;
-}
-
-function showLoginErr(msg) {
-  const el = document.getElementById('lerr');
-  el.textContent = msg;
-  el.classList.add('on');
-}
-
-/* ═══════════════════════════════════════════════════════════
-   FACULTY — load ALL students from GAS (StudentsDB sheet)
-   Called once right after successful faculty login.
-═══════════════════════════════════════════════════════════ */
-async function loadAllStudents() {
-  document.getElementById('f-neterr').classList.remove('on');
-
-  // Show loading state in dropdowns
-  ['fd','fy','fs'].forEach(id => {
-    const el = document.getElementById(id);
-    el.innerHTML = '<option>Loading from sheet…</option>';
-    el.disabled = true;
-  });
-  document.getElementById('slist-wrap').innerHTML =
-    '<div class="empty"><span class="empty-ic" style="font-size:2rem">⏳</span>Fetching student data from Google Sheet…</div>';
-
-  try {
-    /* GAS reads StudentsDB sheet → returns array of student objects */
-    const res = await gasCall({ action: 'getStudents' });
-    if (!res.success) throw new Error(res.message);
-
-    allStudents = res.students || [];
-
-    if (allStudents.length === 0) {
-      document.getElementById('slist-wrap').innerHTML =
-        '<div class="empty"><span class="empty-ic">📭</span>No students found in the sheet. Please add data to StudentsDB.</div>';
-      ['fd','fy','fs'].forEach(id => { document.getElementById(id).innerHTML='<option value="">— No data —</option>'; document.getElementById(id).disabled=true; });
-      return;
-    }
-
-    populateDepts();
-    toast('✅ Loaded ' + allStudents.length + ' students from sheet');
-  } catch (e) {
-    document.getElementById('f-neterr').classList.add('on');
-    document.getElementById('slist-wrap').innerHTML =
-      '<div class="empty"><span class="empty-ic">⚠️</span>Failed to load students. Use the Retry button above.</div>';
-    ['fd','fy','fs'].forEach(id => {
-      document.getElementById(id).innerHTML='<option value="">— Unavailable —</option>';
-      document.getElementById(id).disabled = true;
-    });
-  }
-}
-
-/* ─── CASCADING FILTERS (pure client-side from allStudents[]) ─── */
-function uniq(arr) { return [...new Set(arr)].sort(); }
-
-function setOpts(id, opts, prompt, disabled) {
-  const el = document.getElementById(id);
-  el.innerHTML = `<option value="">${prompt}</option>` + opts.map(o=>`<option>${o}</option>`).join('');
-  el.disabled = disabled;
-}
-
-function populateDepts() {
-  const depts = uniq(allStudents.map(s => s.dept));
-  setOpts('fd', depts, '— Select Dept —', false);
-  setOpts('fy', [], '— Select Year —', true);
-  setOpts('fs', [], '— Select Section —', true);
-  clearView();
-}
-
-function onDeptChange() {
-  const d = document.getElementById('fd').value;
-  setOpts('fy', [], '— Select Year —', true);
-  setOpts('fs', [], '— Select Section —', true);
-  clearView();
-  if (!d) return;
-  setOpts('fy', uniq(allStudents.filter(s=>s.dept===d).map(s=>s.year)), '— Select Year —', false);
-}
-
-function onYearChange() {
-  const d = document.getElementById('fd').value;
-  const y = document.getElementById('fy').value;
-  setOpts('fs', [], '— Select Section —', true);
-  clearView();
-  if (!y) return;
-  setOpts('fs', uniq(allStudents.filter(s=>s.dept===d&&s.year===y).map(s=>s.section)), '— Select Section —', false);
-}
-
-function onSecChange() {
-  const d = document.getElementById('fd').value;
-  const y = document.getElementById('fy').value;
-  const s = document.getElementById('fs').value;
-  clearView();
-  if (!s) return;
-  filteredList = allStudents.filter(st=>st.dept===d&&st.year===y&&st.section===s);
-  renderCards(filteredList);
-}
-
-/* ─── STUDENT CARDS ─── */
-function clearView() {
-  document.getElementById('slist-wrap').innerHTML =
-    '<div class="empty"><span class="empty-ic">🎒</span>Select Dept → Year → Section to view students</div>';
-  clearSel();
-}
-
-function renderCards(list) {
-  clearSel();
-  if (!list.length) {
-    document.getElementById('slist-wrap').innerHTML =
-      '<div class="empty"><span class="empty-ic">🔍</span>No students found for this combination</div>';
-    return;
-  }
-  document.getElementById('slist-wrap').innerHTML =
-    `<div class="slist">${list.map((s,i)=>`
-      <div class="sc" id="sc${i}" onclick="pickStudent(${i})">
-        <div class="av">${s.name.charAt(0).toUpperCase()}</div>
-        <div class="si">
-          <h4>${s.name}</h4>
-          <p>${s.rollNo} &nbsp;·&nbsp; ${s.dept} &nbsp;·&nbsp; ${s.year} &nbsp;·&nbsp; Sec&nbsp;${s.section}</p>
+      <div class="card">
+        <div class="tabs">
+          <button class="tb on" onclick="switchRole('faculty')">👩‍🏫 Registration Desk</button>
+          <button class="tb" onclick="switchRole('admin')">🛡️ Admin Login</button>
         </div>
-        <div class="chk">✓</div>
-      </div>`).join('')}</div>`;
-}
+        <div class="fg">
+          <label>Username</label>
+          <input type="text" id="lu" placeholder="Enter your username" autocomplete="username">
+        </div>
+        <div class="fg">
+          <label>Password</label>
+          <input type="password" id="lp" placeholder="Enter your password" autocomplete="current-password"
+            onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <div class="err" id="lerr"></div>
+        <button class="btn" id="lbtn" onclick="doLogin()">Sign In →</button>
+      </div>
+      <p style="text-align:center;color:var(--gr);font-size:.75rem;margin-top:18px">© 2026 Namma Campus · All rights
+        reserved</p>
+    </div>
+  </div>
 
-function pickStudent(i) {
-  document.querySelectorAll('.sc').forEach(c=>c.classList.remove('sel'));
-  document.getElementById('sc'+i).classList.add('sel');
-  selStudent = filteredList[i];
-  const s = selStudent;
-  document.getElementById('rchips').innerHTML = [
-    ['Name',s.name],['Roll No.',s.rollNo],
-    ['Dept',s.dept],['Year',s.year],['Section',s.section]
-  ].map(([k,v])=>`<div class="chip">${k}<span>${v}</span></div>`).join('');
-  document.getElementById('fcount').value = '';
-  document.getElementById('rpanel').style.display = 'block';
-  document.getElementById('rpanel').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
+  <!-- ══════════ FACULTY PORTAL ══════════ -->
+  <div id="pg-faculty" class="pg pg-portal">
+    <div class="topbar">
+      <div class="tb-brand">
+        <div class="tb-icon">🎓</div>
+        <div>
+          <h2>Namma Campus Sangamam 2026</h2><span>Faculty Portal</span>
+        </div>
+      </div>
+      <div class="tb-right">
+        <div class="ubadge">👤 <span id="fname"></span></div>
+        <button class="btn btn-red btn-sm" onclick="logout()">⏻ Logout</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="sec-title">Family Registration</div>
+      <div class="net-err" id="f-neterr">
+        <span style="font-size:1.6rem">⚠️</span>
+        <div class="net-err-msg"><strong>Could not load student data.</strong>Check GAS_URL and ensure Web App is
+          deployed with "Anyone" access.</div>
+        <button class="btn btn-out btn-sm" onclick="loadAllStudents()">↻ Retry</button>
+      </div>
+      <!-- Filters -->
+      <div class="frow">
+        <div class="fg" style="margin:0"><label>Department</label><select id="fd" onchange="onDeptChange()">
+            <option value="">— Select Dept —</option>
+          </select></div>
+        <div class="fg" style="margin:0"><label>Year</label><select id="fy" onchange="onYearChange()" disabled>
+            <option value="">— Select Year —</option>
+          </select></div>
+        <div class="fg" style="margin:0"><label>Section</label><select id="fs" onchange="onSecChange()" disabled>
+            <option value="">— Select Section —</option>
+          </select></div>
+      </div>
+      <!-- Progress Bar -->
+      <div class="prog-wrap" id="prog-wrap" style="display:none">
+        <div class="prog-header"><span>Section Progress</span><span class="prog-pct" id="prog-text">0%</span></div>
+        <div class="prog-bar">
+          <div class="prog-fill" id="prog-fill" style="width:0%"></div>
+        </div>
+        <div class="prog-stats">
+          <div class="prog-stat">
+            <div class="prog-dot" style="background:var(--green)"></div><span id="prog-reg">0 Registered</span>
+          </div>
+          <div class="prog-stat">
+            <div class="prog-dot" style="background:var(--pk)"></div><span id="prog-unreg">0 Pending</span>
+          </div>
+          <div class="prog-stat">
+            <div class="prog-dot" style="background:var(--pu)"></div><span id="prog-total">0 Total</span>
+          </div>
+        </div>
+      </div>
+      <!-- View Tabs -->
+      <div class="view-tabs" id="view-tabs" style="display:none">
+        <button class="vt vt-unreg on" id="vt-unreg" onclick="switchView('unregistered')">📋 Pending <span
+            class="vt-cnt" id="vc-unreg">0</span></button>
+        <button class="vt vt-reg" id="vt-reg" onclick="switchView('registered')">✅ Registered <span class="vt-cnt"
+            id="vc-reg">0</span></button>
+      </div>
+      <!-- Search -->
+      <div class="search-wrap" id="search-wrap" style="display:none">
+        <span class="search-ic">🔍</span>
+        <input type="text" id="search-input" placeholder="Search by name or roll number…" oninput="onSearch()">
+      </div>
+      <!-- Student List -->
+      <div id="slist-wrap">
+        <div class="empty"><span class="empty-ic">🎒</span>
+          <p>Select Dept → Year → Section to view students</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-function clearSel() {
-  document.querySelectorAll('.sc').forEach(c=>c.classList.remove('sel'));
-  selStudent = null;
-  document.getElementById('rpanel').style.display = 'none';
-}
+  <!-- ══════════ ADMIN PORTAL ══════════ -->
+  <div id="pg-admin" class="pg pg-portal">
+    <div class="topbar">
+      <div class="tb-brand">
+        <div class="tb-icon">🎓</div>
+        <div>
+          <h2>Namma Campus Sangamam 2026</h2><span>Admin Dashboard</span>
+        </div>
+      </div>
+      <div class="tb-right">
+        <div class="ubadge">🛡️ Administrator</div>
+        <button class="btn btn-red btn-sm" onclick="logout()">⏻ Logout</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="sec-title">Dashboard Overview</div>
+      <div class="net-err" id="a-neterr">
+        <span style="font-size:1.6rem">⚠️</span>
+        <div class="net-err-msg"><strong>Could not load dashboard data.</strong>Verify GAS_URL and Web App deployment
+          settings.</div>
+        <button class="btn btn-out btn-sm" onclick="loadAdminData()">↻ Retry</button>
+      </div>
+      <div class="stats">
+        <div class="stc">
+          <div class="stc-icon">👨‍🎓</div>
+          <div class="stc-num" id="s-stu">—</div>
+          <div class="stc-lbl">Students Registered</div>
+        </div>
+        <div class="stc">
+          <div class="stc-icon">👨‍👩‍👧‍👦</div>
+          <div class="stc-num" id="s-fam">—</div>
+          <div class="stc-lbl">Total Family Members</div>
+        </div>
+        <div class="stc">
+          <div class="stc-icon">🏫</div>
+          <div class="stc-num" id="s-dep">—</div>
+          <div class="stc-lbl">Departments</div>
+        </div>
+        <div class="stc">
+          <div class="stc-icon">👩‍🏫</div>
+          <div class="stc-num" id="s-fac">—</div>
+          <div class="stc-lbl">Faculty Entered</div>
+        </div>
+      </div>
+      <div class="twrap">
+        <div class="thead2">
+          <h3>📊 Dept · Year · Section Summary</h3>
+          <button class="btn btn-out btn-sm" onclick="loadAdminData()">↻ Refresh</button>
+        </div>
+        <div class="tscroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Section</th>
+                <th>Students</th>
+                <th>Family Members</th>
+              </tr>
+            </thead>
+            <tbody id="atb">
+              <tr>
+                <td colspan="5" style="text-align:center;padding:32px"><span class="spin spin-pu"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="twrap">
+        <div class="thead2">
+          <h3>🕐 All Registrations</h3>
+          <span id="rec-count" style="font-size:.8rem;color:var(--gr)"></span>
+        </div>
+        <div class="tscroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Roll No.</th>
+                <th>Name</th>
+                <th>Dept</th>
+                <th>Year</th>
+                <th>Sec</th>
+                <th>Family</th>
+                <th>Faculty</th>
+              </tr>
+            </thead>
+            <tbody id="rtb">
+              <tr>
+                <td colspan="8" style="text-align:center;padding:32px"><span class="spin spin-pu"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-/* ═══════════════════════════════════════════════════════════
-   FACULTY — submit → GAS appends row to RegisteredDB sheet
-═══════════════════════════════════════════════════════════ */
-async function submitReg() {
-  if (!selStudent) { toast('⚠️ Please select a student first.'); return; }
-  const fc = parseInt(document.getElementById('fcount').value);
-  if (!fc || fc < 1) { toast('⚠️ Enter a valid family member count.'); return; }
+  <!-- ══════════ ANIMATED POPUP ══════════ -->
+  <div id="overlay" class="overlay" onclick="if(event.target===this)closePopup()">
+    <div class="popup">
+      <!-- Header -->
+      <div class="ph">
+        <div class="ph-top">
+          <div class="ph-av" id="popup-av">?</div>
+          <div class="ph-info">
+            <h3 id="popup-name">Student Name</h3>
+            <p id="popup-rollno">Roll Number</p>
+          </div>
+          <button class="ph-close" onclick="closePopup()">×</button>
+        </div>
+        <div class="ph-status">
+          <div class="status-pill">
+            <div class="status-dot" id="popup-sdot"></div>
+            <span id="popup-stxt">Registration</span>
+          </div>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="pb">
+        <div class="sec-lbl">Student Information</div>
+        <div class="info-grid">
+          <div class="ii"><label>Department</label>
+            <div class="val" id="popup-dept">—</div>
+          </div>
+          <div class="ii"><label>Year</label>
+            <div class="val" id="popup-year">—</div>
+          </div>
+          <div class="ii"><label>Section</label>
+            <div class="val" id="popup-sec">—</div>
+          </div>
+          <div class="ii" id="popup-fac-wrap" style="display:none"><label>Registered by</label>
+            <div class="val" id="popup-fac">—</div>
+          </div>
+          <div class="ii full edit-hi" id="popup-prev-wrap" style="display:none">
+            
+            <div class="val" id="popup-prev">—</div>
+          </div>
+        </div>
+        <div class="sec-lbl">Family Members Count</div>
+        <div class="fam-input-box">
+          <label>How many family members are attending?</label>
+          <div class="count-ctrl">
+            <button class="cnt-btn" id="btn-minus" onclick="adjustCount(-1)">−</button>
+            <input type="number" id="popup-fcount" min="1" max="50" placeholder="0" oninput="syncQC()"
+              onkeydown="if(event.key==='Enter')submitPopup()">
+            <button class="cnt-btn" onclick="adjustCount(1)">+</button>
+          </div>
+          <div class="quick-counts">
+            <span style="font-size:.73rem;color:var(--gr);align-self:center;flex-shrink:0">Quick pick:</span>
+            <button class="qc" onclick="setCount(2)">1</button>
+            <button class="qc" onclick="setCount(3)">2</button>
+            <button class="qc" onclick="setCount(4)">3</button>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="pf">
+        <button class="btn" id="popup-submit-btn" onclick="submitPopup()">
+          <span id="popup-btn-text">💾 Save Registration</span>
+        </button>
+        <button class="btn btn-out" onclick="closePopup()"
+          style="flex:0 0 auto;width:auto;padding:14px 20px">Cancel</button>
+      </div>
+    </div>
+  </div>
 
-  const btn = document.querySelector('#rpanel .btn');
-  btn.innerHTML = '<span class="spin"></span> Saving to sheet…';
-  btn.disabled = true;
+  <div id="toast"></div>
 
-  try {
-    /* GAS appends a new row to RegisteredDB with auto-incremented S.No. */
-    const res = await gasCall({
-      action:      'registerFamily',
-      rollNo:      selStudent.rollNo,
-      name:        selStudent.name,
-      dept:        selStudent.dept,
-      year:        selStudent.year,
-      section:     selStudent.section,
-      familyCount: fc,
-      faculty:     currentUser
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       ▶ PASTE YOUR GAS WEB APP URL BELOW — only change needed
+    ═══════════════════════════════════════════════════════ */
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxcgyxjldtvI8-xwFm6x0fqLaL7DJOO1exOXiNvH_3AJMz6_L6_sUCuSwXfH-cZ3pti/exec';
+
+    /* STATE */
+    let activeRole = 'faculty';
+    let activeView = 'unregistered';
+    let currentUser = '';
+    let allStudents = [];
+    let registeredData = [];   // ← always mirrors the backend RegisteredDB sheet
+    let sectionList = [];   // students in current Dept+Year+Section
+    let filteredList = [];   // after search filter
+    let popupStudent = null;
+    let isEditMode = false;
+
+    /* BOOT */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const ls = document.getElementById('ls');
+        ls.style.transition = 'opacity .4s';
+        ls.style.opacity = '0';
+        setTimeout(() => { ls.style.display = 'none'; showPage('login'); }, 420);
+      }, 1800);
     });
 
-    if (res.success) {
-      toast('✅ Saved to Google Sheet! (S.No. ' + res.sno + ')');
-      clearSel();
-    } else {
-      toast('❌ ' + (res.message || 'Registration failed.'));
+    /* GAS FETCH */
+    async function gasCall(params) {
+      if (!GAS_URL || GAS_URL === 'YOUR_GAS_WEB_APP_URL_HERE') throw new Error('GAS_URL not set.');
+      const url = GAS_URL + '?data=' + encodeURIComponent(JSON.stringify(params));
+      const res = await fetch(url, { method: 'GET', cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
     }
-  } catch (e) {
-    toast('❌ Network error. Check connection and GAS_URL.');
-  }
 
-  btn.innerHTML = '✅ Submit Registration';
-  btn.disabled = false;
-}
+    /* PAGE NAV */
+    function showPage(n) {
+      document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+      document.getElementById('pg-' + n).classList.add('on');
+    }
 
-/* ═══════════════════════════════════════════════════════════
-   ADMIN — fetch all rows from RegisteredDB sheet via GAS
-═══════════════════════════════════════════════════════════ */
-async function loadAdminData() {
-  document.getElementById('a-neterr').classList.remove('on');
-  ['s-stu','s-fam','s-dep','s-fac'].forEach(id=>document.getElementById(id).textContent='…');
-  document.getElementById('atb').innerHTML =
-    '<tr><td colspan="5" style="text-align:center;padding:32px"><span class="spin spin-pu"></span></td></tr>';
-  document.getElementById('rtb').innerHTML =
-    '<tr><td colspan="8" style="text-align:center;padding:32px"><span class="spin spin-pu"></span></td></tr>';
+    /* ══ LOGIN ══ */
+    function switchRole(r) {
+      activeRole = r;
+      document.querySelectorAll('.tabs .tb').forEach((b, i) =>
+        b.classList.toggle('on', (i === 0 && r === 'faculty') || (i === 1 && r === 'admin')));
+      document.getElementById('lerr').classList.remove('on');
+    }
 
-  try {
-    /* GAS reads all rows from RegisteredDB sheet */
-    const res = await gasCall({ action: 'getAdminData' });
-    if (!res.success) throw new Error(res.message);
-    renderDashboard(res.registrations || []);
-  } catch (e) {
-    document.getElementById('a-neterr').classList.add('on');
-    ['s-stu','s-fam','s-dep','s-fac'].forEach(id=>document.getElementById(id).textContent='—');
-    document.getElementById('atb').innerHTML =
-      '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gr)">Failed to load</td></tr>';
-    document.getElementById('rtb').innerHTML =
-      '<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--gr)">Failed to load</td></tr>';
-  }
-}
+    async function doLogin() {
+      const user = document.getElementById('lu').value.trim();
+      const pass = document.getElementById('lp').value.trim();
+      document.getElementById('lerr').classList.remove('on');
+      if (!user || !pass) { showLoginErr('Please enter username and password.'); return; }
+      const btn = document.getElementById('lbtn');
+      btn.innerHTML = '<span class="spin"></span> Verifying…';
+      btn.disabled = true;
+      try {
+        const res = await gasCall({ action: 'login', username: user, password: pass, role: activeRole });
+        if (res.success) {
+          currentUser = user;
+          if (res.role === 'Admin') { showPage('admin'); loadAdminData(); }
+          else { document.getElementById('fname').textContent = user; showPage('faculty'); loadAllStudents(); }
+        } else showLoginErr(res.message || 'Invalid username or password.');
+      } catch (e) { showLoginErr('⚠️ Cannot reach server. Check GAS_URL.'); }
+      btn.innerHTML = 'Sign In →'; btn.disabled = false;
+    }
+    function showLoginErr(m) { const e = document.getElementById('lerr'); e.textContent = m; e.classList.add('on'); }
 
-function renderDashboard(data) {
-  /* Stats cards */
-  document.getElementById('s-stu').textContent = data.length;
-  document.getElementById('s-fam').textContent = data.reduce((a,r)=>a+(r.familyCount||0),0);
-  document.getElementById('s-dep').textContent = uniq(data.map(r=>r.dept)).length;
-  document.getElementById('s-fac').textContent = uniq(data.map(r=>r.faculty)).length;
+    /* ══ FACULTY — LOAD DATA (parallel fetch for speed) ══ */
+    async function loadAllStudents() {
+      document.getElementById('f-neterr').classList.remove('on');
+      document.getElementById('prog-wrap').style.display = 'none';
+      document.getElementById('view-tabs').style.display = 'none';
+      document.getElementById('search-wrap').style.display = 'none';
+      ['fd', 'fy', 'fs'].forEach(id => { const e = document.getElementById(id); e.innerHTML = '<option>Loading…</option>'; e.disabled = true; });
+      document.getElementById('slist-wrap').innerHTML = '<div class="empty"><span class="empty-ic" style="font-size:2rem">⏳</span><p>Fetching from Server…</p></div>';
+      try {
+        const [r1, r2] = await Promise.all([
+          gasCall({ action: 'getStudents' }),
+          gasCall({ action: 'getAdminData' })
+        ]);
+        if (!r1.success) throw new Error(r1.message);
+        allStudents = r1.students || [];
+        registeredData = r2.success ? (r2.registrations || []) : [];
+        if (!allStudents.length) {
+          document.getElementById('slist-wrap').innerHTML = '<div class="empty"><span class="empty-ic">📭</span><p>No students in StudentsDB yet.</p></div>';
+          ['fd', 'fy', 'fs'].forEach(id => { document.getElementById(id).innerHTML = '<option value="">—No data—</option>'; document.getElementById(id).disabled = true; });
+          return;
+        }
+        populateDepts();
+        toast('Loaded ' + allStudents.length + ' students', 'info');
+      } catch (e) {
+        document.getElementById('f-neterr').classList.add('on');
+        document.getElementById('slist-wrap').innerHTML = '<div class="empty"><span class="empty-ic">⚠️</span><p>Failed to load. Use Retry above.</p></div>';
+        ['fd', 'fy', 'fs'].forEach(id => { document.getElementById(id).innerHTML = '<option value="">—Unavailable—</option>'; document.getElementById(id).disabled = true; });
+      }
+    }
 
-  /* Group by dept + year + section */
-  const grp = {};
-  data.forEach(r => {
-    const k = `${r.dept}|||${r.year}|||${r.section}`;
-    if (!grp[k]) grp[k]={dept:r.dept,year:r.year,section:r.section,cnt:0,fam:0};
-    grp[k].cnt++;
-    grp[k].fam += r.familyCount||0;
-  });
-  const rows = Object.values(grp).sort((a,b)=>
-    a.dept.localeCompare(b.dept)||a.year.localeCompare(b.year)||a.section.localeCompare(b.section));
+    /* reload only registrations after a submit */
+    async function reloadRegistrations() {
+      try {
+        const r = await gasCall({ action: 'getAdminData' });
+        if (r.success) registeredData = r.registrations || [];
+      } catch (_) { }
+    }
 
-  document.getElementById('atb').innerHTML = rows.length
-    ? rows.map(r=>`<tr>
-        <td><span class="badge bp">${r.dept}</span></td>
-        <td>${r.year}</td><td>Section ${r.section}</td>
-        <td><strong>${r.cnt}</strong></td>
-        <td><span class="badge bk">${r.fam}</span></td>
-      </tr>`).join('')
-    : '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gr)">No registrations yet</td></tr>';
+    /* ══ CASCADING DROPDOWNS ══ */
+    function uniq(a) { return [...new Set(a)].sort(); }
+    function setOpts(id, opts, prompt, disabled) {
+      const e = document.getElementById(id);
+      e.innerHTML = `<option value="">${prompt}</option>` + opts.map(o => `<option>${o}</option>`).join('');
+      e.disabled = disabled;
+    }
+    function populateDepts() {
+      setOpts('fd', uniq(allStudents.map(s => s.dept)), '— Select Dept —', false);
+      setOpts('fy', [], '— Select Year —', true);
+      setOpts('fs', [], '— Select Section —', true);
+      clearView();
+    }
+    function onDeptChange() {
+      const d = document.getElementById('fd').value;
+      setOpts('fy', [], '— Select Year —', true);
+      setOpts('fs', [], '— Select Section —', true);
+      clearView(); if (!d) return;
+      setOpts('fy', uniq(allStudents.filter(s => s.dept === d).map(s => s.year)), '— Select Year —', false);
+    }
+    function onYearChange() {
+      const d = document.getElementById('fd').value, y = document.getElementById('fy').value;
+      setOpts('fs', [], '— Select Section —', true);
+      clearView(); if (!y) return;
+      setOpts('fs', uniq(allStudents.filter(s => s.dept === d && s.year === y).map(s => s.section)), '— Select Section —', false);
+    }
 
-  document.getElementById('rec-count').textContent = `${data.length} total record${data.length!==1?'s':''}`;
-  const rev = [...data].reverse();
-  document.getElementById('rtb').innerHTML = rev.length
-    ? rev.map(r=>`<tr>
-        <td>${r.sno}</td>
-        <td><code style="font-size:.82rem;color:var(--pu2)">${r.rollNo}</code></td>
-        <td>${r.name}</td>
-        <td><span class="badge bp">${r.dept}</span></td>
-        <td>${r.year}</td><td>${r.section}</td>
-        <td><span class="badge bk">${r.familyCount}</span></td>
-        <td><span class="badge bg">${r.faculty}</span></td>
-      </tr>`).join('')
-    : '<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--gr)">No registrations yet</td></tr>';
-}
+    /* ══ SECTION CHANGE — builds both lists & updates progress bar ══ */
+    function onSecChange() {
+      const d = document.getElementById('fd').value,
+        y = document.getElementById('fy').value,
+        s = document.getElementById('fs').value;
+      clearView(); if (!s) return;
 
-/* ─── LOGOUT / TOAST ─── */
-function logout() {
-  currentUser=''; selStudent=null; allStudents=[]; filteredList=[];
-  document.getElementById('lu').value='';
-  document.getElementById('lp').value='';
-  document.getElementById('lerr').classList.remove('on');
-  document.getElementById('f-neterr').classList.remove('on');
-  document.getElementById('a-neterr').classList.remove('on');
-  showPage('login');
-  toast('Logged out successfully 👋');
-}
+      sectionList = allStudents.filter(st => st.dept === d && st.year === y && st.section === s);
 
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('on');
-  setTimeout(()=>t.classList.remove('on'), 3400);
-}
-</script>
+      const regSet = new Set(registeredData.map(r => r.rollNo));
+      const regList = sectionList.filter(st => regSet.has(st.rollNo));
+      const unregList = sectionList.filter(st => !regSet.has(st.rollNo));
+      const total = sectionList.length;
+      const pct = total > 0 ? Math.round((regList.length / total) * 100) : 0;
+
+      /* progress bar */
+      document.getElementById('prog-wrap').style.display = 'block';
+      document.getElementById('view-tabs').style.display = 'flex';
+      document.getElementById('search-wrap').style.display = 'block';
+      document.getElementById('search-input').value = '';
+      setTimeout(() => { document.getElementById('prog-fill').style.width = pct + '%'; }, 50);
+      document.getElementById('prog-text').textContent = pct + '%';
+      document.getElementById('prog-reg').textContent = regList.length + ' Registered';
+      document.getElementById('prog-unreg').textContent = unregList.length + ' Pending';
+      document.getElementById('prog-total').textContent = total + ' Total';
+      document.getElementById('vc-unreg').textContent = unregList.length;
+      document.getElementById('vc-reg').textContent = regList.length;
+
+      filteredList = activeView === 'unregistered' ? unregList : regList;
+      renderCards(filteredList);
+    }
+
+    function switchView(v) {
+      activeView = v;
+      document.getElementById('vt-unreg').classList.toggle('on', v === 'unregistered');
+      document.getElementById('vt-reg').classList.toggle('on', v === 'registered');
+      document.getElementById('search-input').value = '';
+      onSecChange();
+    }
+
+    /* ══ SEARCH ══ */
+    function onSearch() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      const regSet = new Set(registeredData.map(r => r.rollNo));
+      let base = activeView === 'unregistered'
+        ? sectionList.filter(st => !regSet.has(st.rollNo))
+        : sectionList.filter(st => regSet.has(st.rollNo));
+      filteredList = q ? base.filter(s => s.name.toLowerCase().includes(q) || s.rollNo.toLowerCase().includes(q)) : base;
+      renderCards(filteredList);
+    }
+
+    /* ══ RENDER CARDS ══
+       Both unregistered AND registered cards → open popup on click
+    ══ */
+    function clearView() {
+      document.getElementById('slist-wrap').innerHTML = '<div class="empty"><span class="empty-ic">🎒</span><p>Select Dept → Year → Section to view students</p></div>';
+      document.getElementById('prog-wrap').style.display = 'none';
+      document.getElementById('view-tabs').style.display = 'none';
+      document.getElementById('search-wrap').style.display = 'none';
+    }
+
+    function renderCards(list) {
+      const isReg = activeView === 'registered';
+      if (!list.length) {
+        const msg = isReg ? 'No registered students here yet' : '🎉 All students in this section are registered!';
+        document.getElementById('slist-wrap').innerHTML = `<div class="empty"><span class="empty-ic">${isReg ? '🔍' : '🎉'}</span><p>${msg}</p></div>`;
+        return;
+      }
+      const html = list.map((s, i) => {
+        const reg = registeredData.find(r => r.rollNo === s.rollNo);
+        if (isReg) {
+          return `<div class="sc reg" onclick="openPopup(${i})">
+        <div class="av av-g">${s.name.charAt(0).toUpperCase()}</div>
+        <div class="si"><h4>${s.name}</h4><p>${s.rollNo} · ${s.dept} · ${s.year} · Sec ${s.section}</p></div>
+        <div class="sc-right"><div class="fam-badge">👨‍👩‍👧 ${reg ? reg.familyCount : '—'}</div><div class="arrow-ic">›</div></div>
+      </div>`;
+        } else {
+          return `<div class="sc unreg" onclick="openPopup(${i})">
+        <div class="av">${s.name.charAt(0).toUpperCase()}</div>
+        <div class="si"><h4>${s.name}</h4><p>${s.rollNo} · ${s.dept} · ${s.year} · Sec ${s.section}</p></div>
+        <div class="sc-right"><div class="pend-badge">Pending</div><div class="arrow-ic">›</div></div>
+      </div>`;
+        }
+      }).join('');
+      document.getElementById('slist-wrap').innerHTML = `<div class="slist">${html}</div>`;
+    }
+
+    /* ══ POPUP ══
+       Opens for BOTH unregistered (new) and registered (edit/update)
+    ══ */
+    function openPopup(i) {
+      popupStudent = filteredList[i];
+      const s = popupStudent;
+      const reg = registeredData.find(r => r.rollNo === s.rollNo);
+      isEditMode = !!reg;
+
+      document.getElementById('popup-av').textContent = s.name.charAt(0).toUpperCase();
+      document.getElementById('popup-name').textContent = s.name;
+      document.getElementById('popup-rollno').textContent = s.rollNo;
+      document.getElementById('popup-dept').textContent = s.dept;
+      document.getElementById('popup-year').textContent = s.year;
+      document.getElementById('popup-sec').textContent = s.section;
+
+      /* status pill */
+      const dot = document.getElementById('popup-sdot');
+      const stxt = document.getElementById('popup-stxt');
+      dot.className = 'status-dot ' + (isEditMode ? 'sdot-reg' : 'sdot-new');
+      stxt.textContent = isEditMode ? '✅ Registered — tap to edit' : '🆕 New Registration';
+
+      /* faculty + previous count (edit mode)
+      const fw = document.getElementById('popup-fac-wrap');
+      const pw = document.getElementById('popup-prev-wrap');
+      if (isEditMode) {
+        fw.style.display = 'block';
+        document.getElementById('popup-fac').textContent = reg.faculty || '—';
+        pw.style.display = 'block';
+        document.getElementById('popup-prev').textContent = reg.familyCount + ' member' + (reg.familyCount !== 1 ? 's' : '') + ' — new value will overwrite this';
+      } else { fw.style.display = 'none'; pw.style.display = 'none'; }*/
+
+      /* family count input */
+      const inp = document.getElementById('popup-fcount');
+      inp.value = isEditMode ? reg.familyCount : '';
+      syncQC();
+
+      /* submit button label */
+      document.getElementById('popup-btn-text').innerHTML = isEditMode ? '💾 Update Registration' : '✅ Save Registration';
+
+      /* show overlay */
+      const ov = document.getElementById('overlay');
+      ov.classList.remove('closing');
+      ov.classList.add('on');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => inp.focus(), 480);
+    }
+
+    function closePopup() {
+      const ov = document.getElementById('overlay');
+      ov.classList.add('closing');
+      setTimeout(() => { ov.classList.remove('on', 'closing'); document.body.style.overflow = ''; popupStudent = null; }, 260);
+    }
+
+    /* count controls */
+    function adjustCount(d) {
+      const i = document.getElementById('popup-fcount');
+      const v = (parseInt(i.value) || 0) + d;
+      if (v < 1) return; i.value = v; syncQC();
+    }
+    function setCount(n) { document.getElementById('popup-fcount').value = n; syncQC(); }
+    function syncQC() {
+      const v = parseInt(document.getElementById('popup-fcount').value);
+      document.querySelectorAll('.qc').forEach(b => b.classList.toggle('active', parseInt(b.textContent) === v));
+      document.getElementById('btn-minus').disabled = !v || v <= 1;
+    }
+
+    /* ══ SUBMIT POPUP
+       Calls 'registerFamily' for BOTH new and update.
+       The updated GAS backend checks if Roll No. already exists
+       and UPDATES that row instead of appending a duplicate.
+    ══ */
+    async function submitPopup() {
+      if (!popupStudent) return;
+      const fc = parseInt(document.getElementById('popup-fcount').value);
+      if (!fc || fc < 1) { toast('Enter a valid family member count', 'error'); return; }
+
+      const btnTxt = document.getElementById('popup-btn-text');
+      const submitBtn = document.getElementById('popup-submit-btn');
+      btnTxt.innerHTML = '<span class="spin"></span> Saving…';
+      submitBtn.disabled = true;
+
+      try {
+        const res = await gasCall({
+          action: 'registerFamily',
+          rollNo: popupStudent.rollNo, name: popupStudent.name,
+          dept: popupStudent.dept, year: popupStudent.year,
+          section: popupStudent.section, familyCount: fc, faculty: currentUser
+        });
+        if (res.success) {
+          const verb = isEditMode ? 'Updated' : 'Registered';
+          toast(`✅ ${verb}: ${fc} family member${fc !== 1 ? 's' : ''}`, 'success');
+          closePopup();
+          await reloadRegistrations(); // re-fetch from backend
+          onSecChange();               // refresh card list + progress bar
+        } else {
+          toast('❌ ' + (res.message || 'Failed. Try again.'), 'error');
+        }
+      } catch (e) { toast('❌ Network error. Check GAS_URL.', 'error'); }
+
+      btnTxt.innerHTML = isEditMode ? '💾 Update Registration' : '✅ Save Registration';
+      submitBtn.disabled = false;
+    }
+
+    /* ══ ADMIN DASHBOARD ══ */
+    async function loadAdminData() {
+      document.getElementById('a-neterr').classList.remove('on');
+      ['s-stu', 's-fam', 's-dep', 's-fac'].forEach(id => document.getElementById(id).textContent = '…');
+      document.getElementById('atb').innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px"><span class="spin spin-pu"></span></td></tr>';
+      document.getElementById('rtb').innerHTML = '<tr><td colspan="8" style="text-align:center;padding:32px"><span class="spin spin-pu"></span></td></tr>';
+      try {
+        const res = await gasCall({ action: 'getAdminData' });
+        if (!res.success) throw new Error(res.message);
+        renderDashboard(res.registrations || []);
+      } catch (e) {
+        document.getElementById('a-neterr').classList.add('on');
+        ['s-stu', 's-fam', 's-dep', 's-fac'].forEach(id => document.getElementById(id).textContent = '—');
+        document.getElementById('atb').innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gr)">Failed to load</td></tr>';
+        document.getElementById('rtb').innerHTML = '<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--gr)">Failed to load</td></tr>';
+      }
+    }
+
+    function renderDashboard(data) {
+      document.getElementById('s-stu').textContent = data.length;
+      document.getElementById('s-fam').textContent = data.reduce((a, r) => a + (r.familyCount || 0), 0);
+      document.getElementById('s-dep').textContent = uniq(data.map(r => r.dept)).length;
+      document.getElementById('s-fac').textContent = uniq(data.map(r => r.faculty)).length;
+      const grp = {};
+      data.forEach(r => { const k = `${r.dept}|||${r.year}|||${r.section}`; if (!grp[k]) grp[k] = { dept: r.dept, year: r.year, section: r.section, cnt: 0, fam: 0 }; grp[k].cnt++; grp[k].fam += r.familyCount || 0; });
+      const rows = Object.values(grp).sort((a, b) => a.dept.localeCompare(b.dept) || a.year.localeCompare(b.year) || a.section.localeCompare(b.section));
+      document.getElementById('atb').innerHTML = rows.length
+        ? rows.map(r => `<tr><td><span class="badge bp">${r.dept}</span></td><td>${r.year}</td><td>Section ${r.section}</td><td><strong>${r.cnt}</strong></td><td><span class="badge bk">${r.fam}</span></td></tr>`).join('')
+        : '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gr)">No registrations yet</td></tr>';
+      document.getElementById('rec-count').textContent = `${data.length} record${data.length !== 1 ? 's' : ''}`;
+      document.getElementById('rtb').innerHTML = data.length
+        ? [...data].reverse().map(r => `<tr><td>${r.sno}</td><td><code style="font-size:.82rem;color:var(--pu2)">${r.rollNo}</code></td><td>${r.name}</td><td><span class="badge bp">${r.dept}</span></td><td>${r.year}</td><td>${r.section}</td><td><span class="badge bk">${r.familyCount}</span></td><td><span class="badge bg">${r.faculty}</span></td></tr>`).join('')
+        : '<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--gr)">No registrations yet</td></tr>';
+    }
+
+    /* ══ LOGOUT ══ */
+    function logout() {
+      currentUser = ''; popupStudent = null;
+      allStudents = []; registeredData = []; sectionList = []; filteredList = [];
+      ['lu', 'lp'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('lerr').classList.remove('on');
+      document.getElementById('f-neterr').classList.remove('on');
+      document.getElementById('a-neterr').classList.remove('on');
+      closePopup();
+      showPage('login');
+      toast('Logged out 👋', 'info');
+    }
+
+    /* ══ TOAST (success / error / info) ══ */
+    function toast(msg, type = 'info') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = type + ' on';
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.className = type, 3600);
+    }
+
+    /* keyboard shortcut */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.getElementById('overlay').classList.contains('on')) closePopup();
+    });
+  </script>
 </body>
+
 </html>
